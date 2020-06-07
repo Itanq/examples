@@ -92,9 +92,6 @@ mod test {
 
     use super::quick_sort;
     use super::quick_sort_no_recursive;
-    use std::io;
-    use std::fs::File;
-    use std::io::BufRead;
 
     #[test]
     fn test_sort1() {
@@ -108,6 +105,11 @@ mod test {
         println!("Before sort: {:?}", nums1);
         quick_sort(&mut nums1);
         println!("After sort: {:?}", nums1);
+
+        let mut nums2 = vec![5, 4, 3, 2, 1];
+        println!("Before sort: {:?}", nums2);
+        quick_sort(&mut nums2);
+        println!("After sort: {:?}", nums2);
 
         let mut strs = vec!["Obama", "Trump", "Bush2", "Clinton", "Bush1", "Reagan", "Carter", "Ford", "Nixon", "Hillary"];
         println!("Before sort: {:?}", strs);
@@ -126,6 +128,11 @@ mod test {
         println!("Before sort: {:?}", nums1);
         quick_sort_no_recursive(&mut nums1);
         println!("After sort: {:?}", nums1);
+
+        let mut nums2 = vec![5, 4, 3, 2, 1];
+        println!("Before sort: {:?}", nums2);
+        quick_sort_no_recursive(&mut nums2);
+        println!("After sort: {:?}", nums2);
 
         let mut strs = vec!["Obama", "Trump", "Bush2", "Clinton", "Bush1", "Reagan", "Carter", "Ford", "Nixon", "Hillary"];
         println!("Before sort: {:?}", strs);
