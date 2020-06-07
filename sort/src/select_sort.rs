@@ -1,4 +1,3 @@
-use std::process::id;
 
 fn select_sort<T: Ord>(arr: &mut [T]) {
     for i in 0..arr.len() {
