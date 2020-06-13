@@ -1,16 +1,13 @@
 use std::fmt::Debug;
 
 fn heap_sort<T: Ord + Copy + Debug>(arr: &mut [T]) {
-    // 构建最小堆
+    // 构建最大堆
     build_heap( arr );
 
-    // 循环删除最小堆的堆顶到数组的最后位置
+    // 循环删除最大堆的堆顶到数组的最后位置,进行 n 次后得到升序数组
     for i in 0..arr.len() {
         pop(arr, arr.len() - i);
     }
-
-    // 反转后既是升序数组
-    arr.reverse();
 }
 
 fn pop<T: Ord + Copy + Debug>(arr: &mut [T], len: usize) -> T {
@@ -24,10 +21,10 @@ fn down_adjust<T: Ord + Copy + Debug>(arr: &mut [T], parent: usize, len: usize) 
     let mut child = parent * 2 + 1;
     let mut parent = parent;
     while child < len {
-        if child + 1 < len && arr[ child ] > arr[ child + 1 ] {
+        if child + 1 < len && arr[ child ] < arr[ child + 1 ] {
             child += 1;
         }
-        if arr[ parent ] > arr[ child ] {
+        if arr[ parent ] < arr[ child ] {
             arr.swap(child, parent);
         }
         parent = child;
@@ -36,7 +33,7 @@ fn down_adjust<T: Ord + Copy + Debug>(arr: &mut [T], parent: usize, len: usize) 
 }
 
 fn build_heap<T: Ord + Copy + Debug>(arr: &mut [T]) {
-    // 从最后一个非叶子节点开始做向下调整来构建最小堆
+    // 从最后一个非叶子节点开始做向下调整来构建最大堆
     for i in (0..=(arr.len()-1)/2).rev() {
         down_adjust(arr, i, arr.len());
     }
