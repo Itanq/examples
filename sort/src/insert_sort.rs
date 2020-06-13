@@ -1,8 +1,14 @@
 use std::fmt::Debug;
 
 fn insert_sort<T: Ord>(arr: &mut [T]) {
+    // i 表示已经有序和无序的分界点，即，前 i 个元素是有序的。
     for i in 1..arr.len() {
+
+        // idx 表示有序元素后的第一个无序元素。
         let mut idx = i;
+
+        // 从有序列表的最后位置往前遍历，并找到可以插入第 idx 个元素的位置，
+        // 使得原本有序的列表还是有序的
         for j in (0..=i-1).rev() {
             if arr[idx] < arr[j] {
                 arr.swap(j, idx);

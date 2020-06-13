@@ -1,5 +1,6 @@
 use std::fmt::Debug;
 
+// 利用最大/小堆的性质不断的输出堆顶元素来进行的排序
 fn heap_sort<T: Ord + Copy + Debug>(arr: &mut [T]) {
     // 构建最大堆
     build_heap( arr );
@@ -10,20 +11,22 @@ fn heap_sort<T: Ord + Copy + Debug>(arr: &mut [T]) {
     }
 }
 
-fn pop<T: Ord + Copy + Debug>(arr: &mut [T], len: usize) -> T {
-    let res = arr[0].clone();
+fn pop<T: Ord + Debug>(arr: &mut [T], len: usize) {
     arr.swap(0, len - 1);
     down_adjust(arr, 0, len-1);
-    res
 }
 
-fn down_adjust<T: Ord + Copy + Debug>(arr: &mut [T], parent: usize, len: usize) {
+fn down_adjust<T: Ord + Debug>(arr: &mut [T], parent: usize, len: usize) {
     let mut child = parent * 2 + 1;
     let mut parent = parent;
     while child < len {
+        // 找到左右子节点中最大的节点
         if child + 1 < len && arr[ child ] < arr[ child + 1 ] {
             child += 1;
         }
+
+        // 当前父节点小于最大的子节点，则父节点下沉到最大子节点的位置，
+        // 对应的，最大子节点则上浮到父节点位置。
         if arr[ parent ] < arr[ child ] {
             arr.swap(child, parent);
         }
@@ -32,7 +35,7 @@ fn down_adjust<T: Ord + Copy + Debug>(arr: &mut [T], parent: usize, len: usize) 
     }
 }
 
-fn build_heap<T: Ord + Copy + Debug>(arr: &mut [T]) {
+fn build_heap<T: Ord + Debug>(arr: &mut [T]) {
     // 从最后一个非叶子节点开始做向下调整来构建最大堆
     for i in (0..=(arr.len()-1)/2).rev() {
         down_adjust(arr, i, arr.len());

@@ -1,4 +1,5 @@
 
+// 每一轮找到一个无序列表中的最小位置，每此交换最小位置
 fn select_sort<T: Ord>(arr: &mut [T]) {
     for i in 0..arr.len() {
         let mut idx = i;

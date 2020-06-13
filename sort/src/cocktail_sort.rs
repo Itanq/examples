@@ -1,4 +1,6 @@
 
+// 鸡尾酒排序，冒泡排序的升级版，区别就是冒泡排序是单向的，每次都是从左往右。
+// 鸡尾酒排序就是双向的冒泡排序，从左往右之后再从右往左。
 fn cocktail_sort<T: Ord>(arr: &mut [T]) {
 
     let mut is_sorted = true;

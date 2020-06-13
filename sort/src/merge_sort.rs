@@ -1,11 +1,15 @@
 use std::fmt::Debug;
 use std::collections::VecDeque;
 
+/// 归并排序本质就是合并两个有序的数组到一个数组中，同时使的合并后的数组还是有序数组。
+/// 所以它需要额外O(n)的空间去临时存储归并的数组
 fn merge_sort<T: Ord + Copy >(arr: &mut [T]) {
     let len = arr.len();
     merge_sort_impl(arr, 0, len-1);
 }
 
+/// 递归实现就是不断把一个数组分成左右两部分，直到只有一个元素位置。因为一个元素肯定是有序的。
+/// 所以此时归并两个有序的元素到一个元素中。
 fn merge_sort_impl<T: Ord + Copy>(arr: &mut [T], st: usize, ed: usize) {
     if st >= ed {
         return;
@@ -16,6 +20,7 @@ fn merge_sort_impl<T: Ord + Copy>(arr: &mut [T], st: usize, ed: usize) {
     merge(arr, st, mid, ed);
 }
 
+/// 直接从归并的大小 1 开始，
 fn merge_sort_no_recursive<T: Ord + Copy + Debug>(arr: &mut [T]) {
 
     let len = arr.len() - 1;
@@ -30,6 +35,7 @@ fn merge_sort_no_recursive<T: Ord + Copy + Debug>(arr: &mut [T]) {
                 right = len;
             }
             merge(arr, left, mid,right);
+
             left = right + 1;
         }
         size *= 2;
@@ -37,9 +43,15 @@ fn merge_sort_no_recursive<T: Ord + Copy + Debug>(arr: &mut [T]) {
 }
 
 fn merge<T: Ord + Copy> (arr: &mut [T], st: usize, mid: usize, ed: usize) {
+    // 申请一个能都容纳两个数组的数组
     let mut sorted = Vec::with_capacity(ed-st+1);
+
+    // 指向第一个数组的起始位置
     let mut p1 = st;
+
+    // 指向第二个数组的起始位置
     let mut p2 = mid+1;
+
     while p1 <= mid && p2 <= ed {
         if arr[p1] < arr[p2] {
             sorted.push(arr[p1].clone());
@@ -57,8 +69,10 @@ fn merge<T: Ord + Copy> (arr: &mut [T], st: usize, mid: usize, ed: usize) {
         sorted.push(arr[p2].clone());
         p2 += 1;
     }
+
     for i in 0..sorted.len() {
-        arr[i+st] = sorted[i];
+        // 归并后的素数复制到元素组中
+        arr[ i + st ] = sorted[ i ];
     }
 }
 

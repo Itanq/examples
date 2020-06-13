@@ -7,14 +7,21 @@ fn quick_sort<T: Ord + Default>(arr: &mut [T]) {
 }
 
 fn quick_sort_impl<T: Ord + Default>(arr: &mut [T], st: isize, ed: isize) {
+    // 左右已经相等了则结束
     if st >= ed {
         return;
     }
+    // 找到一个基准位置，pivot；并且小于基准位置的值的元素都在pivot的左边，
+    // 大于基准位置的值的元素都在pivot的右边
     let pivot = select_pivot_by_pointer_swap(arr, st, ed);
+
+    // 对左右边两边再做同样的事
     quick_sort_impl(arr, st, pivot - 1);
     quick_sort_impl(arr, pivot + 1, ed);
 }
 
+/// 非递归实现；
+/// 一般对于快排这种对一个整体不对折半的操作都可以通过栈来实现
 fn quick_sort_no_recursive<T: Ord + Default>(arr: &mut [T]) {
     let st = 0;
     let ed = arr.len() as isize - 1;
@@ -25,10 +32,12 @@ fn quick_sort_no_recursive<T: Ord + Default>(arr: &mut [T]) {
         let right = stack.pop_back().unwrap();
         let left = stack.pop_back().unwrap();
         let pivot = select_pivot(arr, left, right);
+        // 左半部分区间还可折半，则入栈
         if left < pivot - 1 {
             stack.push_back(left);
             stack.push_back(pivot-1);
         }
+        // 右半部分区间还可折半，则入栈
         if pivot + 1 < right {
             stack.push_back(pivot+1);
             stack.push_back(right);
@@ -68,6 +77,9 @@ fn select_pivot<T: Ord + Default>(arr: &mut [T], st: isize, ed: isize ) -> isize
     index as isize
 }
 
+/// 指针交换法，先从右边开始找到第一个小于基准元素的位置；然后从左边开始找到第一个大于基准元素的位置；
+/// 交换这两个位置；直到左右指针重合时，交换重合位置的元素和基准位置的元素；则此时基准元素左边的值均
+/// 小于基准元素，右边的值均大于基准元素
 fn select_pivot_by_pointer_swap<T: Ord>(arr: &mut [T], st: isize, ed: isize) -> isize {
     let pivot = st as usize;
     let mut left = st as usize;

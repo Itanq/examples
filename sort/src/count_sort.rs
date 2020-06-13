@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+// 计数排序，用途非常有限，仅对个元素之间相差不是很大的整数比较有效
 fn count_sort(arr: &mut [i32]) {
     if arr.len() <= 0 {
         return;
