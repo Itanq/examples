@@ -71,5 +71,4 @@ mod test {
         assert_eq!(strs, vec!["Bush1", "Bush2", "Carter", "Clinton", "Ford", "Hillary", "Nixon", "Obama", "Reagan", "Trump"]);
     }
 
-
 }

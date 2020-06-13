@@ -6,3 +6,4 @@ mod select_sort;
 mod merge_sort;
 mod count_sort;
 mod heap_sort;
+mod cocktail_sort;
