@@ -80,6 +80,7 @@ mod test {
 
     use super::merge_sort;
     use super::merge_sort_no_recursive;
+    use crate::merge_sort::merge_sort_impl;
 
     #[test]
     fn test_sort1() {
@@ -107,6 +108,18 @@ mod test {
         merge_sort(&mut nums2);
         println!("After sort: {:?}\n", nums2);
         assert_eq!(nums2, vec![1, 2, 3, 4, 5]);
+
+        let mut nums3 = vec![1,2,3,4,5,6];
+        println!("Before sort: {:?}", nums3);
+        merge_sort(&mut nums3);
+        println!("After sort: {:?}\n", nums3);
+        assert_eq!(nums3, vec![1, 2, 3, 4, 5,6]);
+
+        let mut nums4 = vec![1];
+        println!("Before sort: {:?}", nums4);
+        merge_sort(&mut nums4);
+        println!("After sort: {:?}\n", nums4);
+        assert_eq!(nums4, vec![1]);
 
         let mut strs = vec!["Obama", "Trump", "Bush2", "Clinton", "Bush1", "Reagan", "Carter", "Ford", "Nixon", "Hillary"];
         println!("Before sort: {:?}", strs);
@@ -141,6 +154,18 @@ mod test {
         merge_sort_no_recursive(&mut nums2);
         println!("After sort: {:?}\n", nums2);
         assert_eq!(nums2, vec![1, 2, 3, 4, 5]);
+
+        let mut nums3 = vec![1,2,3,4,5,6];
+        println!("Before sort: {:?}", nums3);
+        merge_sort_no_recursive(&mut nums3);
+        println!("After sort: {:?}\n", nums3);
+        assert_eq!(nums3, vec![1, 2, 3, 4, 5,6]);
+
+        let mut nums4 = vec![1];
+        println!("Before sort: {:?}", nums4);
+        merge_sort_no_recursive(&mut nums4);
+        println!("After sort: {:?}\n", nums4);
+        assert_eq!(nums4, vec![1]);
 
         let mut strs = vec!["Obama", "Trump", "Bush2", "Clinton", "Bush1", "Reagan", "Carter", "Ford", "Nixon", "Hillary"];
         println!("Before sort: {:?}", strs);

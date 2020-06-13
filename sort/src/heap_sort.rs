@@ -67,6 +67,18 @@ mod test {
         println!("After sort: {:?}\n", nums2);
         assert_eq!(nums2, vec![1, 2, 3, 4, 5]);
 
+        let mut nums3 = vec![1,2,3,4,5,6];
+        println!("Before sort: {:?}", nums3);
+        heap_sort(&mut nums3);
+        println!("After sort: {:?}\n", nums3);
+        assert_eq!(nums3, vec![1, 2, 3, 4, 5,6]);
+
+        let mut nums4 = vec![1];
+        println!("Before sort: {:?}", nums4);
+        heap_sort(&mut nums4);
+        println!("After sort: {:?}\n", nums4);
+        assert_eq!(nums4, vec![1]);
+
         let mut strs = vec!["Obama", "Trump", "Bush2", "Clinton", "Bush1", "Reagan", "Carter", "Ford", "Nixon", "Hillary"];
         println!("Before sort: {:?}", strs);
         heap_sort(&mut strs);
